@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--文件头-->
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--    设置自动映射-->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <setting name="autoMappingBehavior" value="FULL"/>
+    </settings>
+<!--    <typeAliases>-->
+<!--    为某一类指定别名-->
+<!-- <typeAlias type="com.qst.pojo.User" alias="user"/> -->
+<!--    为包指定别名&ndash;&gt;-->
+<!--     <package name="com.qst.pojo"/>-->
+<!--    </typeAliases>-->
+<!-- 指定映射的xml文件-->
+<!--    <mappers>-->
+<!--        <mapper resource="mapper/UserMapper.xml"/>-->
+<!--    </mappers>-->
+</configuration>
