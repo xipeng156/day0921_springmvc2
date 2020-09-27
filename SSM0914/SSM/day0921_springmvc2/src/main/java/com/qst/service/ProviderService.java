@@ -4,6 +4,7 @@ import com.qst.pojo.Provider;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: XiPeng
@@ -16,4 +17,8 @@ public interface ProviderService {
     public int update(Provider provider);
     public int delete(int id);
     public List<Provider> select(HashMap<String, Object> map);
+    int getProviderCount(String proCode,String proName);
+
+    List<Provider> getProvider(Map<String,Object> map);
+
 }

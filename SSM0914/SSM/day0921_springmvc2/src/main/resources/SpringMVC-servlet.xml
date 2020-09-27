@@ -15,7 +15,28 @@
         http://www.springframework.org/schema/util/spring-util.xsd">
 <context:component-scan base-package="com.qst.controller"/>
 <!--    一键式把controller交给spring管理-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+<!--            json乱码-->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=utf-8</value>
+                    </list>
+                </property>
+            </bean>
+<!--            日期乱码-->
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=utf-8</value>
+                        <value>application/json;charset=utf-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
 <!---->
 <!--    根据beannameurlhandlermapping处理映射器找对应控制器-->
 <!--    <bean id="/index.html" class="com.qst.controller.IndexController"/>-->
@@ -26,4 +47,38 @@
     </bean>
     <mvc:resources mapping="/statics/**" location="/statics/"/>
 <!--    <mvc:default-servlet-handler/>-->
+<!--    全局异常-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+<!--key表示异常抛出类型，error表示跳转页面-->
+                <prop key="java.lang.RuntimeException">error</prop>
+            </props>
+        </property>
+
+    </bean>
+    <!--        文件上传-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+<!--        单位-字节-->
+        <property name="maxInMemorySize" value="5000000"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+
+<!--    配置字符过滤-->
+<!--    <mvc:annotation-driven>-->
+<!--        <mvc:message-converters register-defaults="true">-->
+<!--            <bean class="org.springframework.http.converter.StringHttpMessageConverter">-->
+<!--                <property name="supportedMediaTypes">-->
+<!--                    <list>-->
+<!--                        <value>text/html;charset=UTF-8</value>-->
+<!--                        <value>application/json;charset=UTF-8</value>-->
+<!--                    </list>-->
+<!--                </property>-->
+<!--            </bean>-->
+<!--        </mvc:message-converters>-->
+<!--    </mvc:annotation-driven>-->
+<!--文件上传配置-->
+
+
+
 </beans>

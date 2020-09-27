@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: XiPeng
@@ -37,5 +38,15 @@ public class ProviderServiceImpl implements ProviderService {
     @Override
     public List<Provider> select(HashMap<String, Object> map) {
         return providerMapper.select(map);
+    }
+
+    @Override
+    public int getProviderCount(String proCode, String proName) {
+        return providerMapper.getProviderCount(proCode,proName);
+    }
+
+    @Override
+    public List<Provider> getProvider(Map<String, Object> map) {
+        return providerMapper.getProvider(map);
     }
 }

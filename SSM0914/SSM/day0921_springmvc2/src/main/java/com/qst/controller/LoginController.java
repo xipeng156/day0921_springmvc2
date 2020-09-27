@@ -47,10 +47,15 @@ import javax.servlet.http.HttpSession;
         return "frame";
     }
 
-    @ExceptionHandler
-    public String handlerException(RuntimeException e,HttpServletRequest request){
-        request.setAttribute("e",e);
-        return "error";
+//    @ExceptionHandler
+//    public String handlerException(RuntimeException e,HttpServletRequest request){
+//        request.setAttribute("e",e);
+//        return "error";
+//    }
+//退出登录
+    @RequestMapping(value = "/logout.html")
+    public String logout(HttpSession session){
+        session.removeAttribute(Constants.USER_SESSION);
+        return "login";
     }
-
 }

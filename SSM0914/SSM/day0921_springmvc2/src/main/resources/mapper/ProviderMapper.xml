@@ -109,4 +109,32 @@
             </if>
         </where>
     </select>
+
+<!--    查询条数-->
+    <select id="getProviderCount" resultType="int">
+        select count(1) from smbms_provider
+        <where>
+            <if test="proCode != null and proCode != ''">
+                and proCode = #{proCode}
+            </if>
+            <if test="proName != null and proName != ''">
+                and proName = #{proName}
+            </if>
+        </where>
+    </select>
+
+<!--    查询供应商信息-->
+    <select id="getProvider" parameterType="map" resultType="provider">
+        select * from smbms_provider
+        <where>
+            <if test="proCode != null and proCode != ''">
+                and proCode like concat('%',#{proCode},'%')
+            </if>
+            <if test="proName != null and proName != ''">
+                and proName like concat('%',#{proName},'%')
+            </if>
+        </where>
+        order by creationDate desc
+        limit #{pageNo},#{pageSize}
+    </select>
 </mapper>

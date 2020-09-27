@@ -38,6 +38,9 @@
         </set>
         where id = #{id}
     </update>
+
+
+
     <insert id="insert" parameterType="user">
         insert into smbms_user(
         <trim suffixOverrides=",">
@@ -65,6 +68,18 @@
             <if test="userRole != null or userRole != ''">
                 userRole,
             </if>
+            <if test="createdBy != null or createdBy != ''">
+                createdBy,
+            </if>
+            <if test="creationDate != null or creationDate != ''">
+                creationDate,
+            </if>
+            <if test="idPicPath != null or idPicPath != ''">
+                idPicPath,
+            </if>
+            <if test="workPicPath != null or workPicPath != ''">
+                workPicPath,
+            </if>
         </trim>
         ) value (
         <trim suffixOverrides=",">
@@ -91,6 +106,18 @@
             </if>
             <if test="userRole != null or userRole != ''">
                 #{userRole},
+            </if>
+            <if test="createdBy != null or createdBy != ''">
+                #{createdBy},
+            </if>
+            <if test="creationDate != null or creationDate != ''">
+                #{creationDate},
+            </if>
+            <if test="idPicPath != null or idPicPath != ''">
+                #{idPicPath},
+            </if>
+            <if test="workPicPath != null or workPicPath != ''">
+                #{workPicPath},
             </if>
         </trim>
         )
@@ -126,7 +153,50 @@
             </if>
         </where>
     </select>
+
+
+
+
     <select id="login" resultType="user">
         select * from smbms_user where userCode = #{userCode}
     </select>
+
+<!--查询符合条件的人员信息-->
+    <resultMap id="userlist" type="user">
+        <result property="userRoleName" column="roleName"/>
+    </resultMap>
+
+    <select id="getuserlist" resultMap="userlist" parameterType="map">
+        select u.*,r.roleName from smbms_user u,smbms_role r
+        where r.id = u.userRole
+        <if test="userName != null">
+            and u.userName like concat('%',#{userName},'%')
+        </if>
+        <if test="userRoleId != null and userRoleId != 0">
+            and u.userRole = #{userRoleId}
+        </if>
+        order by u.creationDate DESC
+        LIMIT #{pageNo},#{pageSize}
+    </select>
+
+
+<!--查询数据总条数-->
+    <select id="getUserListCount" resultType="int">
+        select count(1) from smbms_user
+        <where>
+            <if test="userName != null">
+                and userName like concat('%',#{userName},'%')
+            </if>
+            <if test="userRoleId != null and userRoleId != 0">
+                and userRole = #{userRoleId}
+            </if>
+        </where>
+    </select>
+
+
+<!--    修改用户-->
+<select id="getUserById" parameterType="int" resultType="user">
+    select * from smbms_user where
+</select>
+
 </mapper>

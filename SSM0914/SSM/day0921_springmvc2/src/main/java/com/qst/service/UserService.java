@@ -1,9 +1,10 @@
 package com.qst.service;
 
 import com.qst.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @Author: XiPeng
@@ -13,4 +14,8 @@ import java.util.Map;
  */
 public interface UserService {
     User login(String userCode,String passWord);
+    ArrayList<User> getuserlist(HashMap<String,Object> map);
+
+    public int getUserListCount(String userName,Integer userRoleId);
+    int insert(User user);
 }

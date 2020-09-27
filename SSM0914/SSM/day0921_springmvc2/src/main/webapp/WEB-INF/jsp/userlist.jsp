@@ -12,6 +12,7 @@
 					 <input name="queryname" class="input-text"	type="text" value="${queryUserName }">
 					 
 					 <span>用户角色：</span>
+<%--					下拉表单--%>
 					 <select name="queryUserRole">
 						<c:if test="${roleList != null }">
 						   <option value="">--请选择--</option>

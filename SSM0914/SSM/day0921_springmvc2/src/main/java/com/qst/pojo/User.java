@@ -1,5 +1,10 @@
 package com.qst.pojo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.util.Date;
 
 /**
@@ -12,6 +17,7 @@ public class User {
     //主键
     private Long id;
     //用户名
+    @NotNull(message = "用户名不能为空")
     private String userCode;
 //    姓名
     private String userName;
@@ -20,6 +26,9 @@ public class User {
 //    性别
     private Integer gender;
 //    生日
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JSONField
+    @Past(message = "出生日期需要早于今日")
     private Date birthday;
 //    联系方式
     private String phone;
@@ -28,7 +37,7 @@ public class User {
 //    角色
     private Integer userRole;
 //    创建者
-    private Long createBy;
+    private Long createdBy;
 //    创建时间
     private Date creationDate;
 //    修改者
@@ -36,13 +45,16 @@ public class User {
 //    修改时间
     private Date modifyDate;
 //    角色名称
-    private String roleName;
+    private String userRoleName;
 //  角色
     private Role role;
 
+    private Integer age;
 
-    public User() {
-    }
+//    证件照
+    private String idPicPath;
+//  生活照
+    private String workPicPath;
 
     @Override
     public String toString() {
@@ -56,12 +68,15 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
                 ", userRole=" + userRole +
-                ", createBy=" + createBy +
+                ", createdBy=" + createdBy +
                 ", creationDate=" + creationDate +
                 ", modifyBy=" + modifyBy +
                 ", modifyDate=" + modifyDate +
-                ", roleName='" + roleName + '\'' +
+                ", userRoleName='" + userRoleName + '\'' +
                 ", role=" + role +
+                ", age=" + age +
+                ", idPicPath='" + idPicPath + '\'' +
+                ", workPicPath='" + workPicPath + '\'' +
                 '}';
     }
 
@@ -137,12 +152,12 @@ public class User {
         this.userRole = userRole;
     }
 
-    public Long getCreateBy() {
-        return createBy;
+    public Long getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCreateBy(Long createBy) {
-        this.createBy = createBy;
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
     }
 
     public Date getCreationDate() {
@@ -169,12 +184,12 @@ public class User {
         this.modifyDate = modifyDate;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getUserRoleName() {
+        return userRoleName;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setUserRoleName(String userRoleName) {
+        this.userRoleName = userRoleName;
     }
 
     public Role getRole() {
@@ -183,5 +198,29 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getIdPicPath() {
+        return idPicPath;
+    }
+
+    public void setIdPicPath(String idPicPath) {
+        this.idPicPath = idPicPath;
+    }
+
+    public String getWorkPicPath() {
+        return workPicPath;
+    }
+
+    public void setWorkPicPath(String workPicPath) {
+        this.workPicPath = workPicPath;
     }
 }
